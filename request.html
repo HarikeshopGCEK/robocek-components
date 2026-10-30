@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ROBOCEK Component Request</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>ROBOCEK Component Request System</h1>
+        <div class="nav-buttons">
+          <button onclick="location.href='index.html'" class="secondary">
+            Admin Login
+          </button>
+        </div>
+      </div>
+
+      <!-- Component Request Form -->
+      <div class="card">
+        <h2>Request Components</h2>
+
+        <div class="form-group">
+          <label for="requesterName">Your Name</label>
+          <input
+            id="requesterName"
+            placeholder="Enter your full name"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="requesterContact">Phone Number</label>
+          <input
+            id="requesterContact"
+            type="tel"
+            placeholder="Enter your phone number"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="requestDuration">Rental Duration</label>
+          <select
+            id="requestDuration"
+            required
+            onchange="updateRequestCartDisplay()"
+          >
+            <option value="">-- Select Duration --</option>
+            <option value="1">1 Month</option>
+            <option value="2">2 Months</option>
+            <option value="3">3 Months</option>
+            <option value="6">6 Months</option>
+            <option value="12">12 Months</option>
+          </select>
+        </div>        <div class="form-group">
+          <label for="requestCategoryFilter">Select Category</label>
+          <select id="requestCategoryFilter" onchange="loadRequestComponents()">
+            <option value="">-- Select Category --</option>
+          </select>
+          <small style="color: var(--muted);">
+            If categories don't load, 
+            <button onclick="window.loadRequestCategories()" class="secondary btn-small" style="padding: 2px 6px; font-size: 0.8em;">
+              Click here to reload
+            </button>
+          </small>
+        </div>
+
+        <div
+          class="form-group"
+          id="requestComponentsSection"
+          style="display: none"
+        >
+          <label>Available Components</label>
+          <div id="requestComponentsList" class="components-list">
+            <!-- Components will be loaded here -->
+          </div>
+        </div>
+
+        <div class="form-group" id="requestCartSection" style="display: none">
+          <label>Requested Items</label>
+          <div id="requestCart" class="rent-cart">
+            <!-- Selected items will appear here -->
+          </div>
+          <div class="total-section">
+            <strong
+              ><span id="requestTotalCost"
+                >Select items to see estimated cost</span
+              ></strong
+            >
+          </div>
+        </div>
+
+        <button
+          id="submitRequestBtn"
+          onclick="submitRequest()"
+          class="primary"
+          style="display: none"
+        >
+          Submit Request
+        </button>
+        <p id="requestMsg" class="message"></p>
+      </div>
+
+      <!-- Information Section -->
+      <div class="card">
+        <h2>How It Works</h2>
+        <div style="color: var(--muted); line-height: 1.6">
+          <p>
+            <strong>1. Select Components:</strong> Browse by category and add
+            components to your request.
+          </p>
+          <p>
+            <strong>2. Choose Duration:</strong> Select how long you need the
+            components.
+          </p>
+          <p>
+            <strong>3. Submit Request:</strong> We'll review your request and
+            contact you for approval.
+          </p>
+          <p>
+            <strong>4. Pickup:</strong> Once approved, visit our office to
+            complete the rental process.
+          </p>
+          <br />
+          <p>
+            <em
+              >Note: This is a request system. Final availability and pricing
+              will be confirmed by our staff.</em
+            >
+          </p>
+        </div>
+      </div>
+
+      <!-- Submitted Requests Section -->
+      <div class="card">
+        <h2>Track Your Requests</h2>
+
+        <div class="form-group">
+          <input
+            id="searchOwnRequests"
+            placeholder="Enter your phone number to search requests"
+            oninput="filterMyRequests()"
+          />
+        </div>
+
+        <div class="table-container">
+          <table id="myRequestsTable">
+            <thead>
+              <tr>
+                <th>Request ID</th>
+                <th>Name</th>
+                <th>Items</th>
+                <th>Duration</th>
+                <th>Estimated Cost</th>
+                <th>Status</th>
+                <th>Request Date</th>
+              </tr>
+            </thead>
+            <tbody id="myRequestsTableBody">
+              <tr>
+                <td colspan="7" style="color: #9fbfb0">
+                  Enter your phone number to view your requests
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="request.js"></script>
+  </body>
+</html>

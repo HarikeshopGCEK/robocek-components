@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>ROBOCEK Rent System</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>ROBOCEK Rent System</h1>
+        <div class="nav-buttons">
+          <button onclick="location.href='dashboard.html'" class="secondary">
+            Inventory Dashboard
+          </button>
+          <button onclick="logout()">Logout</button>
+        </div>
+      </div>
+
+      <!-- Rent New Items Section -->
+      <div class="card">
+        <h2>Rent Components</h2>
+
+        <div class="form-group">
+          <label for="customerName">Customer Name</label>
+          <input id="customerName" placeholder="Enter customer name" required />
+        </div>
+        <div class="form-group">
+          <label for="customerContact">Customer Contact</label>
+          <input
+            id="customerContact"
+            placeholder="Phone number or email"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="issuedBy">Issued By</label>
+          <input id="issuedBy" placeholder="Staff member name" required />
+        </div>
+        <div class="form-group">
+          <label for="position">Position</label>
+          <input id="position" placeholder="Position/Title" required />
+        </div>
+
+        <div class="form-group">
+          <label for="rentalDuration">Rental Duration</label>
+          <select id="rentalDuration" required onchange="updateCartDisplay()">
+            <option value="">-- Select Duration --</option>
+            <option value="1">1 Month</option>
+            <option value="2">2 Months</option>
+            <option value="3">3 Months</option>
+            <option value="6">6 Months</option>
+            <option value="12">12 Months</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="rentCategoryFilter">Select Category</label>
+          <select id="rentCategoryFilter" onchange="loadRentComponents()">
+            <option value="">-- Select Category --</option>
+          </select>
+        </div>
+
+        <div class="form-group" id="componentsSection" style="display: none">
+          <label>Available Components</label>
+          <div id="rentComponentsList" class="components-list">
+            <!-- Components will be loaded here -->
+          </div>
+        </div>
+
+        <div class="form-group" id="cartSection" style="display: none">
+          <label>Selected Items</label>
+          <div id="rentCart" class="rent-cart">
+            <!-- Selected items will appear here -->
+          </div>
+          <div class="total-section">
+            <strong
+              ><span id="totalCost">Select items to see total</span></strong
+            >
+          </div>
+        </div>
+
+        <button
+          id="processRentBtn"
+          onclick="processRent()"
+          class="primary"
+          style="display: none"
+        >
+          Process Rent
+        </button>
+        <p id="rentMsg" class="message"></p>
+      </div>
+
+      <!-- Active Rentals Section -->
+      <div class="card">
+        <h2>Active Rentals</h2>
+
+        <div class="form-group">
+          <input
+            id="searchRental"
+            placeholder="Search by customer name or rental ID"
+            oninput="filterRentals()"
+          />
+        </div>
+
+        <div class="table-container">
+          <table id="rentalsTable">
+            <thead>
+              <tr>
+                <th>Rental ID</th>
+                <th>Customer</th>
+                <th>Contact</th>
+                <th>Items</th>
+                <th>Duration</th>
+                <th>Total Cost</th>
+                <th>Rent Date</th>
+                <th>Return Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="rentalsTableBody">
+              <tr>
+                <td colspan="9" style="color: #9fbfb0">Loading rentals...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Component Requests Management Section -->
+      <div class="card">
+        <h2>Component Requests</h2>
+
+        <div class="form-group">
+          <input
+            id="searchRequests"
+            placeholder="Search by requester name, phone, or request ID"
+            oninput="filterRequests()"
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Filter by Status:</label>
+          <select id="statusFilter" onchange="loadComponentRequests()">
+            <option value="">All Requests</option>
+            <option value="pending">Pending Review</option>
+            <option value="approved">Approved</option>
+            <option value="rejected">Rejected</option>
+            <option value="completed">Completed</option>
+          </select>
+        </div>
+
+        <div class="table-container">
+          <table id="requestsTable">
+            <thead>
+              <tr>
+                <th>Request ID</th>
+                <th>Requester</th>
+                <th>Contact</th>
+                <th>Items</th>
+                <th>Duration</th>
+                <th>Estimated Cost</th>
+                <th>Status</th>
+                <th>Request Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="requestsTableBody">
+              <tr>
+                <td colspan="9" style="color: #9fbfb0">Loading requests...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>

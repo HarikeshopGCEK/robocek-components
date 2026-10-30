@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>ROBOCEK User Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>Welcome to ROBOCEK</h1>
+        <div class="nav-buttons">
+          <span id="welcomeUser" class="welcome-text"></span>
+          <button onclick="logout()">Logout</button>
+        </div>
+      </div>
+
+      <!-- User Info Card -->
+      <div class="card">
+        <h2>Your Profile</h2>
+        <div id="userInfo">
+          <!-- User info will be loaded here -->
+        </div>
+      </div>
+
+      <!-- Browse Components -->
+      <div class="card">
+        <h2>Browse Components</h2>
+
+        <div class="form-group">
+          <label for="userCategoryFilter">Select Category</label>
+          <select id="userCategoryFilter" onchange="loadUserComponents()">
+            <option value="">-- Select Category --</option>
+          </select>
+        </div>
+
+        <div
+          class="form-group"
+          id="userComponentsSection"
+          style="display: none"
+        >
+          <label>Available Components</label>
+          <div id="userComponentsList" class="components-list">
+            <!-- Components will be loaded here -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Shopping Cart -->
+      <div class="card" id="userCartSection" style="display: none">
+        <h2>Your Cart</h2>
+
+        <div class="form-group">
+          <label for="userRentalDuration">Rental Duration</label>
+          <select
+            id="userRentalDuration"
+            required
+            onchange="updateUserCartDisplay()"
+          >
+            <option value="">-- Select Duration --</option>
+            <option value="1">1 Month</option>
+            <option value="2">2 Months</option>
+            <option value="3">3 Months</option>
+            <option value="6">6 Months</option>
+            <option value="12">12 Months</option>
+          </select>
+        </div>
+
+        <div id="userCart" class="rent-cart">
+          <!-- Cart items will appear here -->
+        </div>
+
+        <div class="total-section">
+          <strong
+            ><span id="userTotalCost">Select items to see total</span></strong
+          >
+        </div>
+
+        <button
+          id="checkoutBtn"
+          onclick="checkout()"
+          class="primary"
+          style="display: none"
+        >
+          Submit Rental Request
+        </button>
+        <p id="userCartMsg" class="message"></p>
+      </div>
+
+      <!-- Request New Components -->
+      <div class="card">
+        <h2>Request New Components</h2>
+        <p style="color: var(--muted); margin-bottom: 15px">
+          Don't see what you need? Request new components to be added to our
+          inventory.
+        </p>
+
+        <div class="form-group">
+          <input id="requestComponentName" placeholder="Component Name" />
+        </div>
+
+        <div class="form-group">
+          <input
+            id="requestComponentDescription"
+            placeholder="Description/Specifications"
+          />
+        </div>
+
+        <div class="form-group">
+          <input id="requestComponentCategory" placeholder="Category" />
+        </div>
+
+        <div class="form-group">
+          <textarea
+            id="requestComponentReason"
+            placeholder="Why do you need this component?"
+            rows="3"
+          ></textarea>
+        </div>
+
+        <button onclick="submitComponentRequest()" class="secondary">
+          Submit Request
+        </button>
+        <p id="componentRequestMsg" class="message"></p>
+      </div>
+
+      <!-- Sell Components -->
+      <div class="card">
+        <h2>Sell Components to Us</h2>
+        <p style="color: var(--muted); margin-bottom: 15px">
+          Have components to sell? Let us know what you have available.
+        </p>
+
+        <div class="form-group">
+          <input id="sellComponentName" placeholder="Component Name" />
+        </div>
+
+        <div class="form-group">
+          <input
+            id="sellComponentCondition"
+            placeholder="Condition (New/Used/Excellent/Good/Fair)"
+          />
+        </div>
+
+        <div class="form-group">
+          <input
+            id="sellComponentQuantity"
+            type="number"
+            placeholder="Quantity"
+            min="1"
+          />
+        </div>
+
+        <div class="form-group">
+          <input
+            id="sellComponentPrice"
+            type="number"
+            placeholder="Your asking price (₹)"
+            min="0"
+            step="0.01"
+          />
+        </div>
+
+        <div class="form-group">
+          <textarea
+            id="sellComponentDescription"
+            placeholder="Description and any additional details"
+            rows="3"
+          ></textarea>
+        </div>
+
+        <button onclick="submitSellRequest()" class="secondary">
+          Submit Sell Request
+        </button>
+        <p id="sellRequestMsg" class="message"></p>
+      </div>
+
+      <!-- Your Requests History -->
+      <div class="card">
+        <h2>Your Requests</h2>
+
+        <div class="form-group">
+          <label>Filter by type:</label>
+          <select id="requestTypeFilter" onchange="filterUserRequests()">
+            <option value="all">All Requests</option>
+            <option value="rental">Rental Requests</option>
+            <option value="component">Component Requests</option>
+            <option value="sell">Sell Requests</option>
+          </select>
+        </div>
+
+        <div class="table-container">
+          <table id="userRequestsTable">
+            <thead>
+              <tr>
+                <th>Request ID</th>
+                <th>Type</th>
+                <th>Items/Details</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody id="userRequestsTableBody">
+              <tr>
+                <td colspan="6" style="color: #9fbfb0">
+                  Loading your requests...
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="user-app.js"></script>
+  </body>
+</html>

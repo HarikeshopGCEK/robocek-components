@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>ROBOCEK Admin Login</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Header -->
+      <div class="header" style="text-align: center; margin-bottom: 30px">
+        <h1>ROBOCEK Component System</h1>
+        <p style="color: var(--muted)">
+          Government College of Engineering Kannur
+        </p>
+      </div>
+      <!-- Login Options -->
+      <div style="display: flex; gap: 20px; margin-bottom: 20px">
+        <button
+          id="moderatorLoginBtn"
+          onclick="showModeratorLogin()"
+          class="primary"
+          style="flex: 1"
+        >
+          Moderator Login
+        </button>
+        <button
+          id="userLoginBtn"
+          onclick="showUserLogin()"
+          class="secondary"
+          style="flex: 1"
+        >
+          User Login
+        </button>
+      </div>
+
+      <!-- Moderator Login Card -->
+      <div class="card" id="moderatorLoginCard">
+        <h2>Moderator Login</h2>
+        <input type="email" id="modEmail" placeholder="Moderator Email" />
+        <br /><br />
+        <input type="password" id="modPassword" placeholder="Password" />
+        <br /><br />
+        <button class="primary" onclick="moderatorLogin()">
+          Login as Moderator
+        </button>
+        <p id="modError" class="message"></p>
+      </div>
+
+      <!-- User Login/Signup Card -->
+      <div class="card" id="userLoginCard" style="display: none">
+        <div id="loginForm">
+          <h2>User Login</h2>
+          <input type="email" id="userEmail" placeholder="Your Email" />
+          <br /><br />
+          <input type="password" id="userPassword" placeholder="Password" />
+          <br /><br />
+          <button class="primary" onclick="userLogin()">Login</button>
+          <p id="userError" class="message"></p>
+          <p style="text-align: center; margin-top: 15px">
+            Don't have an account?
+            <a
+              href="#"
+              onclick="showSignupForm()"
+              style="color: var(--green); text-decoration: none"
+              >Sign Up</a
+            >
+          </p>
+        </div>
+
+        <div id="signupForm" style="display: none">
+          <h2>Create User Account</h2>
+          <input type="text" id="signupName" placeholder="Full Name" />
+          <br /><br />
+          <input type="email" id="signupEmail" placeholder="Email" />
+          <br /><br />
+          <input type="tel" id="signupPhone" placeholder="Phone Number" />
+          <br /><br />
+          <input
+            type="password"
+            id="signupPassword"
+            placeholder="Password (min 6 characters)"
+          />
+          <br /><br />
+          <button class="primary" onclick="userSignup()">Create Account</button>
+          <p id="signupError" class="message"></p>
+          <p style="text-align: center; margin-top: 15px">
+            Already have an account?
+            <a
+              href="#"
+              onclick="showLoginForm()"
+              style="color: var(--green); text-decoration: none"
+              >Login</a
+            >
+          </p>
+        </div>
+      </div>
+
+      <!-- Request Components (for non-registered users) -->
+      <div class="card">
+        <h2>Need Components? (Guest Access)</h2>
+        <p style="color: var(--muted); line-height: 1.6">
+          Submit a rental request for ROBOCEK components without creating an
+          account. We'll review your request and contact you for approval.
+        </p>
+        <button
+          onclick="location.href='request.html'"
+          class="secondary"
+          style="width: 100%"
+        >
+          Request Components as Guest
+        </button>
+      </div>
+    </div>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>

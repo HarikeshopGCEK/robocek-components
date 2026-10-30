@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>ROBOCEK Inventory</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>ROBOCEK Inventory Dashboard</h1>
+
+      <div class="card">
+        <h2>Total Visible Components</h2>
+        <p id="componentCount">0</p>
+      </div>
+      <div class="card">
+        <h2>Add New Component</h2>
+
+        <div class="form-group">
+          <input id="name" placeholder="Component Name" />
+        </div>
+        <div class="form-group">
+          <label for="categorySelect">Category</label>
+          <select id="categorySelect" onchange="handleCategoryChange()">
+            <option value="">-- Select Category --</option>
+            <option value="__NEW__">+ Add New Category</option>
+          </select>
+          <input
+            id="newCategoryInput"
+            placeholder="Enter new category name"
+            style="display: none; margin-top: 8px"
+          />
+        </div>
+
+        <div class="form-row">
+          <input
+            id="price"
+            type="number"
+            placeholder="Sale Price"
+            min="0"
+            step="0.01"
+          />
+          <input
+            id="totalQty"
+            type="number"
+            placeholder="Total Quantity"
+            min="0"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="checkbox-label">
+            <input id="rentable" type="checkbox" />
+            Rentable
+          </label>
+        </div>
+
+        <button class="primary" onclick="addComponent()">Add Component</button>
+        <p id="msg"></p>
+      </div>
+      <div class="card">
+        <h2>Search Components</h2>
+
+        <div class="form-group">
+          <label for="categoryFilter">Filter by Category</label>
+          <select id="categoryFilter" onchange="filterComponents()">
+            <option value="">-- All Categories --</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="searchBar">Search by Name</label>
+          <input
+            id="searchBar"
+            type="text"
+            placeholder="Type component name to search..."
+            onkeyup="filterComponents()"
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Add New Category</label>
+          <div class="form-row">
+            <input
+              id="newCategory"
+              placeholder="Enter category name"
+              style="flex: 1"
+            />
+            <button onclick="addNewCategory()" class="secondary">
+              Add Category
+            </button>
+          </div>
+          <p id="categoryMsg" class="message"></p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Available Components</h2>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Category</th>
+              <th>Price</th>
+              <th>Total Qty</th>
+              <th>Available Qty</th>
+              <th>Save</th>
+            </tr>
+          </thead>
+          <tbody id="componentsTable">
+            <tr>
+              <td colspan="6" style="color: #9fbfb0">
+                Select a category to view components
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="nav-buttons">
+        <button onclick="location.href='rent.html'" class="primary">
+          Rent System
+        </button>
+        <button onclick="logout()">Logout</button>
+      </div>
+    </div>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
