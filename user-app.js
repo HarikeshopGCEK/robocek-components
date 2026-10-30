@@ -20,12 +20,12 @@ import {
 
 /* ---------- FIREBASE CONFIG ---------- */
 const firebaseConfig = {
-  apiKey: "AIzaSyA2f8VCbKYhcP8gWMmwOx-FaU5BEKjV3dI",
-  authDomain: "robocek-components.firebaseapp.com",
-  projectId: "robocek-components",
-  storageBucket: "robocek-components.appspot.com",
-  messagingSenderId: "222307898764",
-  appId: "1:222307898764:web:1fcf7455be52f9e201b2a9"
+  apiKey: "YOUR_APP",
+  authDomain: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: "",
+  appId: ""
 };
 
 const app = initializeApp(firebaseConfig);
